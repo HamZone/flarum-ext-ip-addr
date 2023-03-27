@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HamZone\\IP;
+namespace HamZone\IP;
 
 use Flarum\Extend;
 
@@ -21,4 +21,11 @@ return [
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
     new Extend\Locales(__DIR__.'/locale'),
+
+    (new Extend\Middleware('forum'))
+        ->add(Middlewares\ProcessIp::class),
+    (new Extend\Middleware('admin'))
+        ->add(Middlewares\ProcessIp::class),
+    (new Extend\Middleware('api'))
+        ->add(Middlewares\ProcessIp::class),
 ];
